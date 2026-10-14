@@ -41,7 +41,7 @@ export function ThemeProvider({ children }) {
 
   return (
     <ThemeContext.Provider value={{ themeId, theme, changeTheme }}>
-      <div className={`relative min-h-screen w-full transition-colors duration-1000 bg-gradient-to-br ${theme.colors.bg} overflow-hidden`}>
+      <div className={`relative min-h-screen w-full transition-colors duration-1000 bg-linear-to-br ${theme.colors.bg} overflow-hidden`}>
         {children}
       </div>
     </ThemeContext.Provider>

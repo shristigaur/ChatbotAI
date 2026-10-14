@@ -406,7 +406,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="relative h-screen w-full flex overflow-hidden">
+    <div className="relative flex h-dvh w-full overflow-hidden overscroll-none">
       {CurrentBackground && <CurrentBackground />}
       
       {/* Parent Information Modal */}
@@ -424,7 +424,7 @@ export default function ChatPage() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl border-4 border-gray-200"
+              className="relative max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-3xl border-4 border-gray-200 bg-white p-5 shadow-2xl sm:p-8"
             >
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-3xl font-bold text-gray-800">For Parents</h2>
@@ -455,7 +455,7 @@ export default function ChatPage() {
             initial={{ opacity: 0, y: 50, x: -20, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="fixed bottom-35 right-4 md:right-12 z-40 bg-indigo-900 text-white p-6 rounded-3xl rounded-br-none shadow-2xl border-4 border-indigo-400 max-w-sm"
+            className="fixed bottom-28 left-3 right-3 z-40 max-w-sm rounded-3xl rounded-br-none border-4 border-indigo-400 bg-indigo-900 p-4 text-white shadow-2xl sm:bottom-32 sm:left-auto sm:right-6 sm:p-6 md:right-12"
           >
             <div className="text-xl font-bold mb-4 drop-shadow-sm">
               It's night time! 🌙 Want to put on your pajamas?
@@ -536,9 +536,9 @@ export default function ChatPage() {
       </AnimatePresence>
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 transform ${
+        className={`fixed inset-y-0 left-0 z-50 w-[min(20rem,88vw)] transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 md:relative flex h-full w-72 md:w-80 flex-col p-4 shadow-2xl backdrop-blur-md transition-transform duration-300 ${theme.colors.sidebar}`}
+        } md:translate-x-0 md:relative md:w-80 flex h-full flex-col p-3 shadow-2xl backdrop-blur-md transition-transform duration-300 sm:p-4 ${theme.colors.sidebar}`}
       >
         <button 
           onClick={handleNewChat}
@@ -576,7 +576,7 @@ export default function ChatPage() {
           )}
         </div>
         
-        <div className="mt-4 pt-4 border-t border-black/10 flex flex-col gap-3">
+        <div className="box-border mt-4 w-full max-w-full overflow-hidden overflow-x-hidden px-3 pt-4 border-t border-black/10 flex flex-col gap-3">
           <button 
             onClick={toggleSfx}
             className="flex items-center justify-center p-3 min-h-11 bg-black/5 hover:bg-black/10 rounded-xl transition-colors font-bold text-gray-800"
@@ -584,20 +584,20 @@ export default function ChatPage() {
             {isSfxOn ? '🎵 Sound Effects: ON' : '🔇 Sound Effects: OFF'}
           </button>
           
-          <div className="flex gap-2">
+          <div className="flex w-full min-w-0 gap-2">
             <button 
               onClick={() => setShowParentModal(true)}
-              className="flex-1 flex items-center justify-center p-3 min-h-11 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-xl transition-colors font-bold text-sm"
+              className="flex-1 min-w-0 flex items-center justify-center truncate p-3 min-h-11 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-xl transition-colors font-bold text-sm"
             >
-              ℹ️ Ask a Parent
+              <span className="truncate">ℹ️ Ask a Parent</span>
             </button>
             {chats.length > 0 && (
               <button 
                 onClick={confirmDeleteAll}
-                className="flex items-center justify-center p-3 min-h-11 bg-rose-100 hover:bg-rose-200 text-rose-800 rounded-xl transition-colors font-bold text-sm"
+                className="flex-1 min-w-0 flex items-center justify-center truncate p-3 min-h-11 bg-rose-100 hover:bg-rose-200 text-rose-800 rounded-xl transition-colors font-bold text-sm"
                 title="Clear all chats"
               >
-                🗑️ Clear All
+                <span className="truncate">🗑️ Clear All</span>
               </button>
             )}
           </div>
@@ -606,8 +606,8 @@ export default function ChatPage() {
         </div>
       </aside>
 
-      <main className="flex-1 flex flex-col relative h-dvh overflow-hidden">
-        <div className="md:hidden p-4 flex justify-between items-center bg-white/30 backdrop-blur-md z-30 shadow-sm border-b border-white/40 shrink-0">
+      <main className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
+        <div className="z-30 flex shrink-0 items-center justify-between border-b border-white/40 bg-white/30 p-2.5 pt-[max(0.625rem,env(safe-area-inset-top))] shadow-sm backdrop-blur-md md:hidden sm:p-4">
           <button onClick={() => setIsSidebarOpen(true)} className="text-3xl p-2 min-h-11 min-w-11 bg-white/50 rounded-xl shadow-sm">
             ☰
           </button>
@@ -622,33 +622,33 @@ export default function ChatPage() {
           </div>
         )}
 
-        <div className="flex-1 min-h-0 overflow-y-auto p-4 md:p-8 flex flex-col relative custom-scrollbar pb-35">
+        <div className="relative flex min-h-0 flex-1 flex-col overflow-y-auto p-3 pb-3 custom-scrollbar sm:p-4 md:p-8">
           
           {!hasMessages ? (
-            <div className="flex flex-col items-center justify-center flex-1 mt-4">
+            <div className="my-auto flex flex-col items-center justify-center py-4 sm:py-6">
               <motion.div 
                 initial={{ scale: 0, y: 20, opacity: 0 }}
                 animate={{ scale: 1, y: 0, opacity: 1 }}
                 transition={{ type: "spring", bounce: 0.5 }}
-                className={`relative mb-8 p-6 rounded-3xl rounded-br-none shadow-xl max-w-sm text-center text-2xl font-bold border-4 border-white/50 ${theme.colors.botBubble}`}
+                className={`relative mb-4 max-w-sm rounded-3xl rounded-br-none border-4 border-white/50 p-4 text-center text-xl font-bold shadow-xl sm:mb-8 sm:p-6 sm:text-2xl ${theme.colors.botBubble}`}
               >
                 Hi {profileName}! I'm Funny, your friend. Ask me anything!
                 <div className="absolute -bottom-5 right-8 text-3xl drop-shadow-md" style={{ color: 'inherit' }}>▼</div>
               </motion.div>
-              <Character characterId={characterId} outfit={theme.outfit} mood={characterMood} size={220} />
+              <div className="max-w-full scale-90 sm:scale-100"><Character characterId={characterId} outfit={theme.outfit} mood={characterMood} size={220} /></div>
               
               {/* Suggestion Chips */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex flex-wrap justify-center gap-3 mt-10 max-w-2xl"
+                className="mt-5 flex max-w-2xl flex-wrap justify-center gap-2 sm:mt-10 sm:gap-3"
               >
                 {SUGGESTIONS.map(s => (
                   <button 
                     key={s} 
                     onClick={() => handleSend(null, s)}
-                    className="px-6 py-4 min-h-11 bg-white/70 hover:bg-white/90 rounded-full font-bold shadow-md text-gray-800 transition-colors border-2 border-white/50 active:scale-95 text-lg"
+                    className="min-h-11 rounded-full border-2 border-white/50 bg-white/70 px-4 py-2.5 text-sm font-bold text-gray-800 shadow-md transition-colors hover:bg-white/90 active:scale-95 sm:px-6 sm:py-4 sm:text-lg"
                   >
                     {s}
                   </button>
@@ -656,7 +656,7 @@ export default function ChatPage() {
               </motion.div>
             </div>
           ) : (
-            <div className="flex flex-col gap-6 flex-1 max-w-4xl mx-auto w-full z-20 relative justify-end">
+            <div className="relative z-20 mx-auto flex w-full max-w-4xl flex-1 flex-col justify-end gap-4 sm:gap-6">
               {messages.map(msg => {
                 const isUser = msg.role === 'user';
                 const isTyping = msg._id === typingMessageId;
@@ -669,8 +669,8 @@ export default function ChatPage() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div className={`group flex flex-col ${isUser ? 'items-end' : 'items-start'}`}>
-                      <div className={`p-4 px-6 rounded-3xl max-w-[85%] text-xl font-medium shadow-md border-2 border-white/30 whitespace-pre-wrap flex items-center ${
+                    <div className={`flex min-w-0 max-w-[92%] flex-col sm:max-w-[85%] ${isUser ? 'items-end' : 'items-start'}`}>
+                      <div className={`flex max-w-full items-center whitespace-pre-wrap wrap-break-words rounded-3xl border-2 border-white/30 p-3 text-base font-medium shadow-md sm:p-4 sm:px-6 sm:text-xl ${
                         isUser 
                           ? `${theme.colors.userBubble} rounded-br-none` 
                           : `${theme.colors.botBubble} rounded-bl-none`
@@ -707,18 +707,28 @@ export default function ChatPage() {
           )}
         </div>
 
-        <div className="w-full p-4 md:p-6 shrink-0 z-30">
+        <div className="z-30 w-full shrink-0 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 sm:px-4 sm:pb-4 sm:pt-3 md:p-6">
           <form 
             onSubmit={(e) => handleSend(e)}
-            className="max-w-4xl mx-auto flex items-center gap-2 md:gap-3 bg-white/90 backdrop-blur-xl p-2 pl-4 rounded-full shadow-2xl border-4 border-white/50 relative mb-4"
+            className="relative mx-auto mb-0 flex w-full max-w-4xl items-center gap-1.5 rounded-3xl border-2 border-white/50 bg-white/90 p-1.5 pl-2.5 shadow-2xl backdrop-blur-xl sm:gap-2 sm:rounded-full sm:border-4 sm:p-2 sm:pl-4 md:gap-3"
           >
             <button 
               type="button"
               onClick={toggleSpeaker}
-              className="p-2 md:p-3 text-2xl md:text-3xl hover:scale-110 transition-transform bg-gray-100 rounded-full min-h-11 min-w-11 flex items-center justify-center"
+              className="flex min-h-10 min-w-10 shrink-0 items-center justify-center rounded-full bg-gray-100 p-2 text-xl transition-transform hover:scale-110 sm:min-h-11 sm:min-w-11 sm:p-3 sm:text-2xl md:text-3xl"
               title={isSpeakerOn ? 'Mute Speech' : 'Unmute Speech'}
             >
               {isSpeakerOn ? '🔊' : '🔇'}
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleSfx}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 text-sm transition-colors hover:bg-gray-200 md:hidden"
+              title={isSfxOn ? 'Turn sound effects off' : 'Turn sound effects on'}
+              aria-label={isSfxOn ? 'Turn sound effects off' : 'Turn sound effects on'}
+            >
+              {isSfxOn ? '🔊' : '🔇'}
             </button>
             
             <input 
@@ -727,7 +737,7 @@ export default function ChatPage() {
               onChange={handleInputChange}
               disabled={isSending}
               placeholder={isListening ? "I'm listening..." : isSending ? "Funny is thinking..." : "Type a message..."} 
-              className="flex-1 bg-transparent text-xl md:text-2xl p-2 focus:outline-none font-semibold text-gray-700 placeholder-gray-400 disabled:opacity-50 min-h-11"
+              className="min-h-11 min-w-0 flex-1 bg-transparent p-1.5 text-base font-semibold text-gray-700 placeholder-gray-400 focus:outline-none disabled:opacity-50 sm:p-2 sm:text-xl md:text-2xl"
             />
 
             {voiceSupported ? (
@@ -735,7 +745,7 @@ export default function ChatPage() {
                 type="button" 
                 onClick={isListening ? stopListening : startListening}
                 disabled={isSpeaking || isSending}
-                className={`hidden sm:flex items-center justify-center p-3 text-3xl rounded-full transition-all min-h-12.5 min-w-12.5 shrink-0 ${
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm transition-all md:h-11 md:w-11 md:p-2 md:text-2xl ${
                   isListening 
                     ? 'bg-rose-500 text-white animate-pulse shadow-[0_0_15px_rgba(244,63,94,0.7)]' 
                     : 'bg-gray-100 hover:bg-gray-200 disabled:opacity-50'
@@ -745,8 +755,8 @@ export default function ChatPage() {
                 🎤
               </button>
             ) : (
-              <div className="hidden sm:block group relative shrink-0">
-                <button type="button" disabled className="p-3 text-3xl bg-gray-100 rounded-full opacity-50 cursor-not-allowed min-h-12.5 min-w-12.5 flex items-center justify-center">
+              <div className="group relative shrink-0">
+                <button type="button" disabled className="flex h-8 w-8 cursor-not-allowed items-center justify-center rounded-full bg-gray-100 text-sm opacity-50 md:h-11 md:w-11 md:p-2 md:text-2xl">
                   🎤
                 </button>
                 <div className="absolute bottom-full mb-2 right-0 w-48 bg-gray-800 text-white text-sm p-3 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-center font-bold z-50">
@@ -758,7 +768,7 @@ export default function ChatPage() {
             <button 
               type="submit"
               disabled={isSending || !inputText.trim()}
-              className={`p-3 md:p-4 px-6 md:px-8 text-xl md:text-2xl font-bold rounded-full shadow-lg hover:-translate-y-1 hover:shadow-xl active:translate-y-0 transition-all shrink-0 ${theme.colors.button} text-white disabled:opacity-50 disabled:hover:translate-y-0 disabled:shadow-none min-h-11 flex items-center justify-center`}
+              className={`flex min-h-11 shrink-0 items-center justify-center rounded-full px-4 py-2 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl active:translate-y-0 disabled:opacity-50 disabled:hover:translate-y-0 disabled:shadow-none sm:px-6 sm:py-3 sm:text-xl md:px-8 md:py-4 md:text-2xl ${theme.colors.button}`}
             >
               Send ➔
             </button>
